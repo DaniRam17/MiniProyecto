@@ -1,0 +1,76 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "Compilar Proyecto MiniProyecto",
+      "command": "C:\\mingw32\\bin\\g++.exe",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+        "-IC:/Librerias/SFML-2.6.1/include",
+        "-LC:/Librerias/SFML-2.6.1/lib",
+        "${workspaceFolder}/src/main.cpp",
+        "${workspaceFolder}/src/Acceso.cpp",
+        "${workspaceFolder}/src/Usuario.cpp",
+        "${workspaceFolder}/src/HashTable.cpp",
+        "${workspaceFolder}/src/Archivo.cpp",
+        "${workspaceFolder}/src/Menu.cpp",
+        "${workspaceFolder}/src/InputBox.cpp",
+        "${workspaceFolder}/src/GestionAccesosView.cpp",
+        "${workspaceFolder}/src/UsuarioListView.cpp",
+        "${workspaceFolder}/src/PacientesView.cpp",
+        "${workspaceFolder}/src/ListVisualizer.cpp",
+
+        "-o",
+        "${workspaceFolder}/bin/MiniProyecto.exe",
+        "-lsfml-graphics",
+        "-lsfml-window",
+        "-lsfml-system"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Compilación total del sistema con SFML y MinGW"
+    }
+  ]
+}
+
+
+/*{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "Compilar Proyecto MiniProyecto",
+      "command": "C:\\mingw32\\bin\\g++.exe",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+        "-IC:/Librerias/SFML-2.6.1/include",
+        "-LC:/Librerias/SFML-2.6.1/lib",
+        "${file}",
+        "-o",
+        "${fileDirname}\\${fileBasenameNoExtension}.exe",
+        "-lsfml-graphics",
+        "-lsfml-window",
+        "-lsfml-system"
+      ],
+      "options": {
+        "cwd": "C:\\mingw32\\bin"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Compilador de SFML con MinGW y VSCode"
+    }
+  ]
+}
+*/
