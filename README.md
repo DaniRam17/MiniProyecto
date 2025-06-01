@@ -72,28 +72,69 @@ MiniProyecto/
 ##  Compilación
 
 ### Requisitos:
-- Tener instalado `g++` con soporte para C++17
-- Tener SFML correctamente configurado
 
-### Comando para compilar:
+---
+
+##  Compilación
+
+###  Requisitos:
+
+- Tener instalado **MinGW** o cualquier compilador compatible con `g++` y soporte para C++17.
+- Tener descargada y correctamente configurada la librería [SFML 2.6.1](https://www.sfml-dev.org/download.php).
+- Asegúrate de que las rutas de los archivos `.h` y `.lib` estén correctamente incluidas.
+
+###  Archivos esenciales que deben estar presentes:
+
+| Tipo              | Archivos clave                                                        |
+|-------------------|------------------------------------------------------------------------|
+| Ejecutable        | `main.cpp`                                                             |
+| Interfaz gráfica  | `GestionAccesosView.cpp/h`, `InputBox.cpp/h`, `Menu.cpp/h`            |
+| Lógica            | `Usuario.cpp/h`, `Acceso.cpp/h`, `HashTable.cpp/h`                    |
+| Persistencia      | `Archivo.cpp/h`                                                       |
+| Visualización     | `ListVisualizer.cpp/h`, `UsuarioListView.cpp/h`                       |
+| Recursos          | `assets/OpenSans.ttf`                                                 |
+| Datos             | `data/usuarios.dat`, `data/accesos_eliminados.log`                   |
+
+> Si algún archivo está ausente o con nombre incorrecto, la compilación fallará.
+
+---
+
+###  Comando de compilación:
+
 ```bash
 g++ -std=c++17 src/*.cpp -Iinclude -IC:/Librerias/SFML-2.6.1/include -LC:/Librerias/SFML-2.6.1/lib -lsfml-graphics -lsfml-window -lsfml-system -o bin/MiniProyecto.exe
 
+---
 
-Cómo usar
-Ejecutar MiniProyecto.exe
+##  Configuración de entorno y rutas de compilación
 
-Usar la interfaz gráfica para:
+El funcionamiento correcto del proyecto depende de que la librería **SFML 2.6.1** esté instalada correctamente y enlazada con Visual Studio Code.
 
-Registrar un usuario
+###  Archivos clave para compilar correctamente en VSCode:
 
-Registrar accesos
+1. `.vscode/tasks.json` → Define el comando de compilación con las rutas de `SFML`.
+2. `.vscode/launch.json` → Permite ejecutar el ejecutable desde el botón de play ▶️.
+3. `.vscode/c_cpp_properties.json` → Contiene las rutas para que el IntelliSense de VSCode funcione correctamente.
 
-Ver la lista de accesos o usuarios
+### ⚠️ ¡IMPORTANTE!
 
-Eliminar accesos o usuarios
+Si cambias la ubicación del proyecto (por ejemplo, `C:\MiniProyecto\` o `D:\Proyectos\Accesos`), **debes actualizar las rutas** en los siguientes campos:
 
-Los datos se guardan automáticamente en archivos binarios para persistencia.
+```jsonc
+// Dentro de tasks.json
+"-IC:/Librerias/SFML-2.6.1/include",
+"-LC:/Librerias/SFML-2.6.1/lib"
+
+// Dentro de c_cpp_properties.json
+"includePath": [
+  "C:/Librerias/SFML-2.6.1/include",
+  "${workspaceFolder}/include"
+],
+"libPath": [
+  "C:/Librerias/SFML-2.6.1/lib"
+]
+
+
 
 Créditos y referencias
 SFML Documentation: https://www.sfml-dev.org/documentation/2.6.1/
