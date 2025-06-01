@@ -9,7 +9,7 @@
 #include <cstring>
 using namespace std;
 
-// ✅ Guarda los datos del usuario en el archivo binario (serialización manual)
+
 void Archivo::guardarUsuario(const Usuario& usuario, const string& nombreArchivo) {
     ofstream archivo(nombreArchivo, ios::binary | ios::app);
     if (!archivo) {
@@ -37,8 +37,6 @@ void Archivo::guardarUsuario(const Usuario& usuario, const string& nombreArchivo
     archivo.close();
 }
 
-// ✅ Lee los datos del archivo binario y reconstruye objetos Usuario
-// Respetando el orden de inserción en HashTable
 void Archivo::cargarUsuarios(HashTable& tabla, const string& nombreArchivo) {
     ifstream archivo(nombreArchivo, ios::binary);
     if (!archivo) {
@@ -46,7 +44,7 @@ void Archivo::cargarUsuarios(HashTable& tabla, const string& nombreArchivo) {
         return;
     }
 
-    // Limpiar tabla actual para evitar duplicados
+
     tabla.limpiarTabla();
 
     while (!archivo.eof()) {
@@ -70,9 +68,8 @@ void Archivo::cargarUsuarios(HashTable& tabla, const string& nombreArchivo) {
         archivo.read(&fecha[0], tamFecha);
 
         Usuario* nuevo = new Usuario(id, nombre, correo);
-        // Simular fecha recuperada como primer acceso
-        // nota: no lo insertamos manualmente para evitar duplicado visual
-        tabla.insertarUsuario(nuevo); // ✅ Insertarlo respetando orden
+       
+        tabla.insertarUsuario(nuevo);
     }
 
     archivo.close();

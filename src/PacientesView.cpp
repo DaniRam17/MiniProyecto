@@ -7,7 +7,6 @@
 using namespace sf;
 using namespace std;
 
-// Estructura de paciente según el archivo binario
 struct Paciente {
     char nombre[30];
     int edad;
@@ -18,7 +17,6 @@ struct Paciente {
     char fecha[11];
 };
 
-// Muestra gráficamente la lista de pacientes registrados en pacientes.dat
 void mostrarVistaPacientes(Font& fuente) {
     RenderWindow ventana(VideoMode(800, 600), "Listado de Pacientes", Style::Close);
 

@@ -5,10 +5,8 @@
 #include <fstream>
 using namespace std;
 
-// Constructor: inicializa lista vacía
 ListaAccesos::ListaAccesos() : cabeza(nullptr), cola(nullptr), cantidad(0) {}
 
-// Destructor: libera todos los nodos
 ListaAccesos::~ListaAccesos() {
     while (cabeza) {
         Acceso* temp = cabeza;
@@ -18,11 +16,10 @@ ListaAccesos::~ListaAccesos() {
     cola = nullptr;
 }
 
-// ✅ Registra un acceso al inicio de la lista (LIFO)
 void ListaAccesos::registrarAcceso() {
     time_t ahora = time(0);
     string fechaHora = ctime(&ahora);
-    fechaHora.pop_back(); // quitar salto de línea
+    fechaHora.pop_back(); 
 
     Acceso* nuevo = new Acceso(fechaHora);
     nuevo->siguiente = cabeza;
@@ -31,13 +28,13 @@ void ListaAccesos::registrarAcceso() {
     if (cabeza != nullptr)
         cabeza->anterior = nuevo;
     else
-        cola = nuevo; // si la lista estaba vacía
+        cola = nuevo; 
 
     cabeza = nuevo;
     cantidad++;
 }
 
-// ✅ Muestra todos los accesos desde cabeza hasta cola
+
 void ListaAccesos::mostrarAccesos() const {
     Acceso* actual = cabeza;
     int i = 1;
@@ -48,7 +45,7 @@ void ListaAccesos::mostrarAccesos() const {
     }
 }
 
-// ✅ Elimina los primeros n accesos desde cabeza y los guarda en log
+
 void ListaAccesos::eliminarAccesos(int n) {
     ofstream log("data/accesos_eliminados.log", ios::app);
     while (cabeza && n-- > 0) {
@@ -63,17 +60,17 @@ void ListaAccesos::eliminarAccesos(int n) {
     log.close();
 }
 
-// ✅ Devuelve la cantidad de accesos registrados
+
 int ListaAccesos::contarAccesos() const {
     return cantidad;
 }
 
-// ✅ Devuelve el acceso más reciente (cabeza de la lista)
+
 string ListaAccesos::getUltimoAcceso() const {
     return cabeza ? cabeza->fechaHora : "(Sin registros)";
 }
 
-// ✅ Busca un acceso por posición desde cabeza (1-based index)
+
 string ListaAccesos::buscarPorPosicion(int pos) const {
     if (pos <= 0 || pos > cantidad) return "(Posición inválida)";
     Acceso* actual = cabeza;

@@ -4,10 +4,10 @@
 using namespace std;
 using namespace sf;
 
-// ✅ Dibuja lista de usuarios como nodos con posición ajustable
+
 void dibujarUsuarios(RenderWindow& ventana, Font& fuente, const vector<string>& usuarios, float posYInicial, float alturaMaxima) {
     float y = posYInicial;
-    float x = 600; // ✅ Colocado a la derecha para evitar superposición
+    float x = 600;
     float limiteY = posYInicial + alturaMaxima - 40;
 
     for (size_t i = 0; i < usuarios.size(); ++i) {
@@ -36,7 +36,6 @@ void dibujarUsuarios(RenderWindow& ventana, Font& fuente, const vector<string>& 
     }
 }
 
-// ✅ Dibuja lista de accesos también con scroll visual posible
 void dibujarAccesos(RenderWindow& ventana, Font& fuente, const vector<pair<int, string>>& accesos, float posYInicial, float alturaMaxima) {
     float y = posYInicial;
     float x = 50;
@@ -73,7 +72,7 @@ void dibujarAccesos(RenderWindow& ventana, Font& fuente, const vector<pair<int, 
     }
 }
 
-// Funciones de compatibilidad con firmas anteriores
+
 void dibujarUsuarios(RenderWindow& ventana, Font& fuente, const vector<string>& usuarios) {
     dibujarUsuarios(ventana, fuente, usuarios, 450.0f, 200.0f);
 }

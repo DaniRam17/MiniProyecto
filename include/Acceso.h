@@ -11,7 +11,7 @@
 #include <string>
 using namespace std;
 
-// ✅ Nodo de la lista doblemente enlazada
+
 struct Acceso {
     string fechaHora;
     Acceso* siguiente;
@@ -21,7 +21,7 @@ struct Acceso {
         : fechaHora(fechaHora), siguiente(nullptr), anterior(nullptr) {}
 };
 
-// ✅ TDA Lista doblemente enlazada de accesos
+
 class ListaAccesos {
 private:
     Acceso* cabeza;
@@ -32,7 +32,6 @@ public:
     ListaAccesos();
     ~ListaAccesos();
 
-    // ✅ Operaciones sobre accesos
     void registrarAcceso();               // Inserta al inicio (LIFO)
     void eliminarAccesos(int n);          // Elimina n accesos desde cabeza
     void mostrarAccesos() const;          // Muestra de cabeza a cola
@@ -40,7 +39,7 @@ public:
     string getUltimoAcceso() const;       // Acceso en cabeza
     string buscarPorPosicion(int pos) const; // Buscar por posición (desde cabeza)
 
-    // ✅ Permitir acceso directo a la lista para visualización
+
     Acceso* getCabeza() const { return cabeza; }
 };
 

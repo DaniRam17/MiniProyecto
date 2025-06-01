@@ -11,9 +11,9 @@ private:
     std::string contenido;
     std::string placeholder;  
     bool activa;
-    float minWidth;  // Minimum width of the box
-    float originalWidth; // Original width to revert when empty
-    float padding;   // Padding between text and box edges
+    float minWidth;  
+    float originalWidth; 
+    float padding;   
 
 public:
     InputBox(float x, float y, float ancho, float alto, sf::Font& fuente, const std::string& placeholder = "");
@@ -24,8 +24,8 @@ public:
     void setTexto(const std::string& nuevo);
     void setActiva(bool activa);
     void update();
-    void adjustWidth(); // New method to adjust box width
-    void setPosition(float x, float y); // To update position after width changes
+    void adjustWidth();
+    void setPosition(float x, float y); 
 
 };
 

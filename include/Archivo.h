@@ -16,10 +16,10 @@ using namespace std;
 
 class Archivo {
 public:
-    // ✅ Guarda un objeto Usuario en el archivo binario
+   
     static void guardarUsuario(const Usuario& usuario, const string& nombreArchivo);
 
-    // ✅ Lee todos los usuarios desde el archivo binario y los carga en la tabla hash
+  
     static void cargarUsuarios(HashTable& tabla, const string& nombreArchivo);
 };
 

@@ -7,7 +7,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-// Devuelve la opción seleccionada por el usuario desde la interfaz gráfica
+
 int mostrarMenu();
 
 #endif

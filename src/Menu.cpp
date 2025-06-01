@@ -41,23 +41,23 @@ struct BotonResponsive {
         colorHover = hover_color;
         colorTexto = Color::Black;
 
-        // Configurar sombra
+    
         sombra.setSize(Vector2f(ancho, alto));
         sombra.setFillColor(Color(0, 0, 0, 50));
         sombra.setPosition(x + 3, y + 3);
 
-        // Configurar caja principal
+
         caja.setSize(Vector2f(ancho, alto));
         caja.setFillColor(colorBase);
         caja.setPosition(x, y);
 
-        // Configurar texto
+
         texto.setFont(fuente);
         texto.setString(label);
         texto.setCharacterSize(static_cast<unsigned int>(alto * 0.4f)); 
         texto.setFillColor(Color::Black);
         
-        // Centrar texto
+
         actualizarPosicionTexto();
     }
 
@@ -75,7 +75,7 @@ struct BotonResponsive {
         caja.setSize(Vector2f(ancho, alto));
         caja.setPosition(x, y);
         
-        // Ajustar tamaño de texto proporcionalmente
+    
         texto.setCharacterSize(static_cast<unsigned int>(alto * 0.4f));
         actualizarPosicionTexto();
     }
@@ -87,11 +87,11 @@ struct BotonResponsive {
             hover = estaEnHover;
         }
 
-        // Animación suave
+    
         float objetivo = hover ? 1.0f : 0.0f;
         animacion += (objetivo - animacion) * deltaTime * 8.0f;
 
-        // Interpolar colores
+  
         Color colorActual;
         colorActual.r = static_cast<sf::Uint8>(colorBase.r + (colorHover.r - colorBase.r) * animacion);
         colorActual.g = static_cast<sf::Uint8>(colorBase.g + (colorHover.g - colorBase.g) * animacion);
@@ -100,7 +100,7 @@ struct BotonResponsive {
 
         caja.setFillColor(colorActual);
 
-        // Efecto de elevación
+    
         float elevacion = animacion * 2.0f;
         Vector2f posOriginal = caja.getPosition();
         sombra.setPosition(posOriginal.x + 3 + elevacion, posOriginal.y + 3 + elevacion);
@@ -130,7 +130,7 @@ private:
     Clock reloj;
     Vector2u tamañoVentana;
     
-    // Gradiente de fondo
+
     VertexArray fondoGradiente;
 
 public:
@@ -142,8 +142,8 @@ public:
     void configurarFondoGradiente() {
         fondoGradiente.setPrimitiveType(Quads);
         fondoGradiente.resize(4);
-        Color colorSuperior(20, 20, 20);   // Casi negro (gris muy oscuro)
-        Color colorInferior(34, 34, 34);   // Negro suave con un poco de contraste
+        Color colorSuperior(20, 20, 20);   
+        Color colorInferior(34, 34, 34);   
         
         fondoGradiente[0].color = colorSuperior;
         fondoGradiente[1].color = colorSuperior;
@@ -154,54 +154,52 @@ public:
     void actualizarLayout(Vector2u nuevoTamaño) {
         tamañoVentana = nuevoTamaño;
         
-        // Actualizar gradiente de fondo
+ 
         fondoGradiente[0].position = Vector2f(0, 0);
         fondoGradiente[1].position = Vector2f(static_cast<float>(nuevoTamaño.x), 0);
         fondoGradiente[2].position = Vector2f(static_cast<float>(nuevoTamaño.x), static_cast<float>(nuevoTamaño.y));
         fondoGradiente[3].position = Vector2f(0, static_cast<float>(nuevoTamaño.y));
 
-        // Configurar título responsive
+
         titulo.setFont(fuente);
         titulo.setString("Sistema de Accesos");
-        titulo.setCharacterSize(static_cast<unsigned int>(nuevoTamaño.y * 0.08f)); // 8% de la altura
+        titulo.setCharacterSize(static_cast<unsigned int>(nuevoTamaño.y * 0.08f)); 
         titulo.setFillColor(Color::White);
         
         FloatRect tituloRect = titulo.getLocalBounds();
         titulo.setOrigin(tituloRect.left + tituloRect.width / 2, tituloRect.top + tituloRect.height / 2);
         titulo.setPosition(static_cast<float>(nuevoTamaño.x) / 2, static_cast<float>(nuevoTamaño.y) * 0.15f);
 
-        // Limpiar botones existentes
+
         botones.clear();
 
-        // Calcular dimensiones responsive
-        float anchoBoton = static_cast<float>(nuevoTamaño.x) * 0.5f;  // 50% del ancho
-        float altoBoton = static_cast<float>(nuevoTamaño.y) * 0.08f;   // 8% de la altura
-        float espacioVertical = static_cast<float>(nuevoTamaño.y) * 0.12f; // 12% para espaciado
+      
+        float anchoBoton = static_cast<float>(nuevoTamaño.x) * 0.5f;  
+        float altoBoton = static_cast<float>(nuevoTamaño.y) * 0.08f;   
+        float espacioVertical = static_cast<float>(nuevoTamaño.y) * 0.12f; 
         
-        // Limitar tamaños mínimos y máximos
+       
         anchoBoton = max(200.0f, min(anchoBoton, 400.0f));
         altoBoton = max(40.0f, min(altoBoton, 70.0f));
 
         float x = (static_cast<float>(nuevoTamaño.x) - anchoBoton) / 2;
         float yInicial = static_cast<float>(nuevoTamaño.y) * 0.35f;
 
-        // Crear botones con colores diferentes
         botones.emplace_back(x, yInicial, anchoBoton, altoBoton, "Gestionar Accesos", fuente,
-                           Color::White, Color(230, 230, 230)); // Verde
+                           Color::White, Color(230, 230, 230)); 
         
         botones.emplace_back(x, yInicial + espacioVertical, anchoBoton, altoBoton, "Ver Pacientes", fuente,
-                          Color::White, Color(230, 230, 230)); // Azul
+                          Color::White, Color(230, 230, 230)); 
         
         botones.emplace_back(x, yInicial + espacioVertical * 2, anchoBoton, altoBoton, "Salir", fuente,
-                          Color::White, Color(230, 230, 230)); // Rojo
+                          Color::White, Color(230, 230, 230));
     }
 
     int ejecutar() {
-        Vector2u tamañoInicial(800, 600); // Tamaño inicial más grande
+        Vector2u tamañoInicial(800, 600); 
         ventana = new RenderWindow(VideoMode(tamañoInicial.x, tamañoInicial.y), 
                                  "Sistema de Accesos", Style::Default);
-        
-        // Configurar ícono de ventana (opcional)
+     
         ventana->setVerticalSyncEnabled(true);
         
         actualizarLayout(tamañoInicial);
@@ -216,7 +214,7 @@ public:
                 }
 
                 if (evento.type == Event::Resized) {
-                    // Actualizar vista cuando se redimensiona
+                   
                     ventana->setView(View(FloatRect(0, 0, 
                         static_cast<float>(evento.size.width), 
                         static_cast<float>(evento.size.height))));
@@ -229,19 +227,19 @@ public:
                     for (size_t i = 0; i < botones.size(); ++i) {
                         if (botones[i].estaPresionado(mousePos)) {
                             delete ventana;
-                            return static_cast<int>(i + 1); // Retornar 1, 2, 3
+                            return static_cast<int>(i + 1);
                         }
                     }
                 }
             }
 
-            // Actualizar animaciones
+        
             Vector2f mousePos = ventana->mapPixelToCoords(Mouse::getPosition(*ventana));
             for (auto& boton : botones) {
                 boton.actualizar(mousePos, deltaTime);
             }
 
-            // Dibujar todo
+          
             ventana->clear();
             ventana->draw(fondoGradiente);
             ventana->draw(titulo);

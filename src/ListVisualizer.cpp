@@ -1,11 +1,11 @@
-// Archivo: src/ListVisualizer.cpp
+
 #include "../include/ListVisualizer.h"
 #include <SFML/Graphics.hpp>
 #include <sstream>
 using namespace std;
 using namespace sf;
 
-// ✅ Dibuja una lista enlazada visual de accesos
+
 void mostrarListaAccesos(Font& fuente, const vector<pair<int, string>>& accesos) {
     RenderWindow ventana(VideoMode(1200, 200), "Lista de Accesos (Visualizacion)", Style::Titlebar | Style::Close);
     ventana.setFramerateLimit(60);
@@ -22,14 +22,13 @@ void mostrarListaAccesos(Font& fuente, const vector<pair<int, string>>& accesos)
         float x = 30;
         float y = 80;
         for (size_t i = 0; i < accesos.size(); ++i) {
-            // Dibujar nodo
+       
             RectangleShape nodo(Vector2f(180, 40));
             nodo.setPosition(x, y);
             nodo.setFillColor(Color(50, 150, 250));
             nodo.setOutlineThickness(2);
             nodo.setOutlineColor(Color::White);
 
-            // Texto dentro del nodo
             Text txt(accesos[i].second, fuente, 13);
             txt.setFillColor(Color::White);
             txt.setPosition(x + 8, y + 10);
@@ -37,7 +36,7 @@ void mostrarListaAccesos(Font& fuente, const vector<pair<int, string>>& accesos)
             ventana.draw(nodo);
             ventana.draw(txt);
 
-            // Flecha al siguiente nodo
+ 
             if (i < accesos.size() - 1) {
                 Vertex arrow[] = {
                     Vertex(Vector2f(x + 180, y + 20), Color::White),
@@ -53,7 +52,7 @@ void mostrarListaAccesos(Font& fuente, const vector<pair<int, string>>& accesos)
     }
 }
 
-// ✅ Dibuja una lista visual de usuarios en orden de inserción
+
 void mostrarListaUsuarios(Font& fuente, const vector<string>& usuarios) {
     RenderWindow ventana(VideoMode(1200, 200), "Lista de Usuarios (Visualizacion)", Style::Titlebar | Style::Close);
     ventana.setFramerateLimit(60);

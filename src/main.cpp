@@ -15,7 +15,7 @@
 
 using namespace std;
 
-// ✅ Carga fuente con ruta flexible
+
 sf::Font cargarFuente() {
     sf::Font fuente;
     vector<string> rutas = {
@@ -41,11 +41,11 @@ int main() {
     if (!fuente.getInfo().family.empty()) {
         HashTable tabla;
 
-        // ✅ Cargar usuarios desde archivo respetando orden de inserción
+ 
         Archivo::cargarUsuarios(tabla, "data/usuarios.dat");
 
         while (true) {
-            int opcion = mostrarMenu(); // menú principal
+            int opcion = mostrarMenu(); 
             if (opcion == 1) {
                 mostrarVistaGestionAccesos(fuente, tabla);
             } else if (opcion == 2) {

@@ -12,9 +12,9 @@ InputBox::InputBox(float x, float y, float ancho, float alto, sf::Font& fuente, 
 
     texto.setFont(fuente);
     texto.setCharacterSize(18);
-    texto.setPosition(x + padding, y + (alto - 18) / 2); // Vertically centered
+    texto.setPosition(x + padding, y + (alto - 18) / 2); 
 
-    // Initially show placeholder in gray
+   
     texto.setFillColor(sf::Color(150, 150, 150));
     texto.setString(placeholder);
 }
@@ -27,14 +27,14 @@ void InputBox::handleEvent(const sf::Event& event) {
     } 
     else if (event.type == sf::Event::TextEntered && activa) {
         if (event.text.unicode == 8 && !contenido.empty()) {
-            // Backspace: remove last character
+          
             contenido.pop_back();
         } else if (event.text.unicode < 128 && event.text.unicode >= 32) {
-            // Only allow printable characters
+       
             contenido += static_cast<char>(event.text.unicode);
         }
         update();
-        adjustWidth(); // Adjust width after text changes
+        adjustWidth(); 
     }
 }
 
@@ -59,27 +59,27 @@ void InputBox::setActiva(bool estado) {
 }
 
 void InputBox::update() {
-    // Change border color based on active state
+ 
     caja.setOutlineColor(activa ? sf::Color(30, 144, 255) : sf::Color::Black);
 
     if (contenido.empty() && !activa) {
-        // Show placeholder in gray
+    
         texto.setFillColor(sf::Color(150, 150, 150));
         texto.setString(placeholder);
     }
     else {
-        // Show content in black
+       
         texto.setFillColor(sf::Color::Black);
         texto.setString(contenido);
     }
 }
 
 void InputBox::adjustWidth() {
-    // Calculate required width based on text
+   
     float textWidth = texto.getLocalBounds().width + 2 * padding;
     float newWidth = std::max(minWidth, textWidth);
     
-    // Only update if width changed significantly
+  
     if (std::abs(caja.getSize().x - newWidth) > 1.0f) {
         caja.setSize(sf::Vector2f(newWidth, caja.getSize().y));
     }
