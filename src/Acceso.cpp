@@ -1,81 +1,123 @@
-// Archivo: src/Acceso.cpp
+
 #include "../include/Acceso.h"
-#include <iostream>
 #include <ctime>
-#include <fstream>
+#include <sstream>
+#include <iostream>
+
 using namespace std;
 
-ListaAccesos::ListaAccesos() : cabeza(nullptr), cola(nullptr), cantidad(0) {}
+
+Acceso::Acceso() {
+    time_t now = time(0);
+    tm* ltm = localtime(&now);
+    stringstream ss;
+    ss << 1900 + ltm->tm_year << "-"
+       << 1 + ltm->tm_mon << "-"
+       << ltm->tm_mday << " "
+       << ltm->tm_hour << ":"
+       << ltm->tm_min << ":"
+       << ltm->tm_sec;
+    fechaHora = ss.str();
+    siguiente = nullptr;
+    anterior = nullptr;
+}
+
+
+ListaAccesos::ListaAccesos() {
+    cabeza = nullptr;
+}
+
 
 ListaAccesos::~ListaAccesos() {
-    while (cabeza) {
-        Acceso* temp = cabeza;
-        cabeza = cabeza->siguiente;
+    Acceso* actual = cabeza;
+    while (actual) {
+        Acceso* temp = actual;
+        actual = actual->siguiente;
         delete temp;
     }
-    cola = nullptr;
 }
 
 void ListaAccesos::registrarAcceso() {
-    time_t ahora = time(0);
-    string fechaHora = ctime(&ahora);
-    fechaHora.pop_back(); 
+  
+    if (contarAccesos() >= MAX_ACCESOS) {
+        eliminarUltimoAcceso();
+    }
 
-    Acceso* nuevo = new Acceso(fechaHora);
+    Acceso* nuevo = new Acceso();
     nuevo->siguiente = cabeza;
     nuevo->anterior = nullptr;
 
-    if (cabeza != nullptr)
+    if (cabeza) {
         cabeza->anterior = nuevo;
-    else
-        cola = nuevo; 
+    }
 
     cabeza = nuevo;
-    cantidad++;
+}
+
+
+void ListaAccesos::eliminarAccesos(int n) {
+    for (int i = 0; i < n && cabeza; ++i) {
+        Acceso* temp = cabeza;
+        cabeza = cabeza->siguiente;
+        if (cabeza) cabeza->anterior = nullptr;
+        delete temp;
+    }
+}
+
+
+void ListaAccesos::eliminarUltimoAcceso() {
+    if (!cabeza) return;
+
+    Acceso* temp = cabeza;
+    while (temp->siguiente) {
+        temp = temp->siguiente;
+    }
+
+    if (temp->anterior) {
+        temp->anterior->siguiente = nullptr;
+    } else {
+        cabeza = nullptr; // único nodo
+    }
+
+    delete temp;
+}
+
+
+int ListaAccesos::contarAccesos() const {
+    int contador = 0;
+    Acceso* actual = cabeza;
+    while (actual) {
+        ++contador;
+        actual = actual->siguiente;
+    }
+    return contador;
 }
 
 
 void ListaAccesos::mostrarAccesos() const {
     Acceso* actual = cabeza;
-    int i = 1;
     while (actual) {
-        cout << "(" << i << ") " << actual->fechaHora << endl;
+        cout << actual->fechaHora << endl;
         actual = actual->siguiente;
-        ++i;
     }
-}
-
-
-void ListaAccesos::eliminarAccesos(int n) {
-    ofstream log("data/accesos_eliminados.log", ios::app);
-    while (cabeza && n-- > 0) {
-        log << cabeza->fechaHora << endl;
-        Acceso* temp = cabeza;
-        cabeza = cabeza->siguiente;
-        if (cabeza) cabeza->anterior = nullptr;
-        else cola = nullptr;
-        delete temp;
-        cantidad--;
-    }
-    log.close();
-}
-
-
-int ListaAccesos::contarAccesos() const {
-    return cantidad;
 }
 
 
 string ListaAccesos::getUltimoAcceso() const {
-    return cabeza ? cabeza->fechaHora : "(Sin registros)";
+    return cabeza ? cabeza->fechaHora : "Sin registros";
 }
 
 
 string ListaAccesos::buscarPorPosicion(int pos) const {
-    if (pos <= 0 || pos > cantidad) return "(Posición inválida)";
     Acceso* actual = cabeza;
-    for (int i = 1; i < pos; ++i) {
+    int contador = 0;
+    while (actual && contador < pos) {
         actual = actual->siguiente;
+        contador++;
     }
-    return actual->fechaHora;
+    return actual ? actual->fechaHora : "No existe";
+}
+
+Acceso* ListaAccesos::getCabeza() const {
+    return cabeza;
 }

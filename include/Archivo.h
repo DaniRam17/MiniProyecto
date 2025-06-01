@@ -21,6 +21,9 @@ public:
 
   
     static void cargarUsuarios(HashTable& tabla, const string& nombreArchivo);
+    static void guardarAccesos(const Usuario& usuario, const std::string& nombreArchivo);
+
+
 };
 
 #endif

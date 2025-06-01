@@ -229,6 +229,7 @@ void mostrarVistaGestionAccesos(Font& fuente, HashTable& tabla) {
                     Usuario* u = tabla.buscarUsuario(id);
                     if (u) {
                         u->registrarAcceso();
+                        Archivo::guardarAccesos(*u, "data/historial_accesos.txt");
                         salida.setString("Acceso registrado.");
                         salida.setFillColor(colorExito);
                         accesosVisibles = tabla.obtenerAccesosVisuales(id);
