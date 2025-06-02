@@ -67,13 +67,6 @@ MiniProyecto/
 └── README.md
 
 
----
-
-##  Compilación
-
-### Requisitos:
-
----
 
 ##  Compilación
 
